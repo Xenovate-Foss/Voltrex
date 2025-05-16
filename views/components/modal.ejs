@@ -1,0 +1,120 @@
+<div x-data="{ open: false }" 
+     x-show="open" 
+     @keydown.escape.window="open = false"
+     @toggle-modal.window="open = !open"
+     x-transition:enter="transition ease-out duration-200"
+     x-transition:enter-start="opacity-0"
+     x-transition:enter-end="opacity-100"
+     x-transition:leave="transition ease-in duration-150"
+     x-transition:leave-start="opacity-100"
+     x-transition:leave-end="opacity-0"     
+     class="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center"
+     style="display: none;" id="createServerModal">
+
+  <div x-show="open"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0 translate-y-4"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100 translate-y-0"
+       x-transition:leave-end="opacity-0 translate-y-4"
+       class="relative w-full max-w-lg max-h-[85vh] overflow-auto bg-card border border-border shadow-lg rounded-lg p-6">
+    
+    <!-- Close button -->
+    <button @click="open = false" class="absolute top-4 right-4 p-1 rounded-full text-muted-foreground hover:text-foreground transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+        <path d="M18 6 6 18"></path>
+        <path d="m6 6 12 12"></path>
+      </svg>
+    </button>
+    
+    <!-- Modal header -->
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold text-foreground">Create a new server</h2>
+      <p class="text-sm text-muted-foreground mt-1">Configure your server settings below</p>
+    </div>
+    
+    <!-- Form -->
+    <form class="space-y-4">
+      <!-- Server name -->
+      <div>
+        <label for="InputName" class="block text-sm font-medium text-foreground mb-1.5">Server Name</label>
+        <input type="text" id="InputName" class="input w-full" placeholder="My awesome server">
+      </div>
+
+      <!-- Resources grid -->
+      <div class="grid grid-cols-3 gap-4">
+        <div>
+          <label for="InputRAM" class="block text-sm font-medium text-foreground mb-1.5">Memory (GB)</label>
+          <input type="number" id="InputRAM" class="input w-full" placeholder="2">
+        </div>
+        <div>
+          <label for="InputDisk" class="block text-sm font-medium text-foreground mb-1.5">Storage (GB)</label>
+          <input type="number" id="InputDisk" class="input w-full" placeholder="10">
+        </div>
+        <div>
+          <label for="InputCPU" class="block text-sm font-medium text-foreground mb-1.5">CPU Cores</label>
+          <input type="number" id="InputCPU" class="input w-full" placeholder="1">
+        </div>
+      </div>
+
+      <!-- Location selection -->
+      <div>
+        <label class="block text-sm font-medium text-foreground mb-2">Location</label>
+        <div class="grid grid-cols-2 gap-3 mt-1">
+          <% for (let [name, value] of Object.entries(settings.api.client.locations)) { %>
+            <% if (value.show) { %>
+              <div class="flex items-center p-3 rounded-md border border-border bg-card hover:bg-secondary/20 cursor-pointer transition-colors location-card" 
+                   data-name="<%= name %>" 
+                   onclick="selectLocation('<%= name %>')">
+                <img class="w-6 h-4 mr-2" src="https://flagsapi.com/<%= value.iso %>/flat/64.png" alt="<%= value.name %> flag">
+                <span class="text-sm font-medium"><%= value.name %></span>
+              </div>
+            <% } %>
+          <% } %>
+        </div>
+        <input type="hidden" id="InputLoc">
+      </div>
+      
+      <!-- Software selection -->
+      <div>
+        <label for="InputEgg" class="block text-sm font-medium text-foreground mb-1.5">Software</label>
+        <select id="InputEgg" class="input w-full">
+          <% for (let [name, value] of Object.entries(settings.api.client.eggs)) { %>
+            <% if (value.pro) { %>
+              <% if (packagename !== 'pro') { %>
+              <% } else { %>
+                <option value="<%= name %>"><%= value.display %></option>
+              <% } %>
+            <% } else { %>
+              <option value="<%= name %>"><%= value.display %></option>
+            <% } %>
+          <% } %>
+        </select>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="flex justify-end space-x-3 pt-2">
+        <button type="button" @click="open = false" class="btn-outline">
+          Cancel
+        </button>
+        <button type="button" onclick="submitNew()" class="btn-primary">
+          Create Server
+        </button>
+      </div>
+      
+      <!-- Terms note -->
+      <p class="text-xs text-muted-foreground text-center mt-4">
+        By creating a server, you agree to the <%= settings.name %> User Agreement and Minecraft EULA.
+      </p>
+    </form>
+  </div>
+</div>
+
+<style>
+  /* Selected location styling */
+  .location-card.card-selected {
+    border-color: hsl(var(--primary));
+    background-color: hsl(var(--primary)/0.1);
+  }
+</style>

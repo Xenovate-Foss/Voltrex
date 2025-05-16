@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<%- include('./components/head') %>
+
+<body class="min-h-screen bg-background font-sans antialiased flex flex-col items-center justify-center p-4 md:p-8">
+  <div class="container max-w-md">
+    <!-- Login card -->
+    <div class="card border-border/40 overflow-hidden">
+      <div class="card-header flex justify-center pb-2">
+        <div class="flex items-center">
+          <img src="<%= settings.icon %>" alt="<%= settings.name %>" class="w-10 h-10 mr-3">
+          <h1 class="text-2xl font-bold tracking-tight text-foreground"><%= settings.name %></h1>
+        </div>
+      </div>
+      
+      <div class="card-content text-center">
+        <h2 class="text-xl font-semibold mb-2">Sign in to continue</h2>
+        <p class="text-muted text-muted-foreground mb-6">Access your game servers and resources</p>
+        
+        <a href="../oauth/discord" class="btn-primary w-full justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+            <polyline points="10 17 15 12 10 7"></polyline>
+            <line x1="15" x2="3" y1="12" y2="12"></line>
+          </svg>
+          Continue with Discord
+        </a>
+      </div>
+      
+      <div class="card-footer justify-center border-t border-border/30 bg-muted/30">
+        <p class="text-sm text-muted">
+          By signing in, you agree to our Terms of Service
+        </p>
+      </div>
+    </div>
+    
+    <!-- Features -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+      <div class="flex flex-col items-center text-center p-4">
+        <div class="w-10 h-10 rounded-full icon-bg flex items-center justify-center mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 icon-color">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <h3 class="font-medium mb-1">Secure Access</h3>
+        <p class="text-sm text-muted">Your data is protected with Discord OAuth</p>
+      </div>
+      
+      <div class="flex flex-col items-center text-center p-4">
+        <div class="w-10 h-10 rounded-full icon-bg flex items-center justify-center mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 icon-color">
+            <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
+            <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
+            <line x1="6" x2="6.01" y1="6" y2="6"></line>
+            <line x1="6" x2="6.01" y1="18" y2="18"></line>
+          </svg>
+        </div>
+        <h3 class="font-medium mb-1">Server Management</h3>
+        <p class="text-sm text-muted">Easily manage all your game servers</p>
+      </div>
+      
+      <div class="flex flex-col items-center text-center p-4">
+        <div class="w-10 h-10 rounded-full icon-bg flex items-center justify-center mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 icon-color">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" x2="12" y1="15" y2="3"></line>
+          </svg>
+        </div>
+        <h3 class="font-medium mb-1">Free Resources</h3>
+        <p class="text-sm text-muted">Get coins by completing tasks</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <div class="mt-8 text-center">
+    <p class="text-sm text-muted">
+      &copy; <%= new Date().getFullYear() %> <%= settings.name %>. All rights reserved.
+    </p>
+    <div class="flex items-center justify-center space-x-4 mt-2">
+      <a href="/" class="text-sm text-muted hover:text-foreground transition-colors">Home</a>
+      <a href="<%= settings.website.discord %>" class="text-sm text-muted hover:text-foreground transition-colors">Discord</a>
+      <a href="/terms" class="text-sm text-muted hover:text-foreground transition-colors">Terms</a>
+    </div>
+  </div>
+</body>
+</html> 

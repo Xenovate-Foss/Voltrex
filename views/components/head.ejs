@@ -1,0 +1,39 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= settings.name %> - Client Area</title>
+  <link rel="icon" href="<%= settings.icon %>">
+  <link rel="stylesheet" href="../assets/tailwind.css">
+  <link rel="stylesheet" href="../assets/fixes.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.10/cdn.js" defer></script>
+  <script src="../assets/nav-fix.js" defer></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      background-color: var(--background-color, hsl(var(--background)));
+      color: var(--foreground-color, hsl(var(--foreground)));
+    }
+    
+    /* Modern scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: var(--background-color, hsl(var(--background)));
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--muted-color, hsl(var(--muted)));
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--muted-foreground, hsl(var(--muted-foreground)));
+    }
+  </style>
+</head>

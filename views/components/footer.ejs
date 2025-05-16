@@ -1,0 +1,57 @@
+<style>
+    .fade-out {
+      transition: opacity 0.2s ease-out;
+      opacity: 0;
+    }
+    </style>
+  <div x-data="{
+    endDate: new Date('July 30, 2024 00:00:00'),
+    time: '',
+    init() {
+      this.updateCountdown();
+      setInterval(() => {
+        this.updateCountdown();
+      }, 1000);
+    },
+    updateCountdown() {
+      const now = new Date();
+      const distance = this.endDate - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      this.time = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      if (distance < 0) {
+        this.time = 'EXPIRED';
+      }
+    },
+    close() {
+      const el = this.$root;
+      el.classList.add('fade-out');
+      setTimeout(() => el.remove(), 500); // Match the duration of the fade-out animation
+    }
+}" x-init="init()" class="pointer-events-none fixed inset-x-0 bottom-0 sm:flex sm:justify-center sm:px-6 sm:pb-5 lg:px-8">
+</div>
+
+<footer class="mt-auto py-6 border-t border-border/40">
+  <div class="container flex flex-col items-center justify-between gap-4 md:flex-row">
+    <p class="text-sm text-muted-foreground">
+      &copy; <%= new Date().getFullYear() %> <%= settings.name %>. All rights reserved.
+    </p>
+    
+    <div class="flex items-center space-x-4">
+      <a href="<%= settings.website.discord %>" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+        Discord
+      </a>
+      <a href="/terms" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+        Terms
+      </a>
+      <a href="/privacy" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+        Privacy
+      </a>
+      <div class="text-sm text-muted-foreground">
+        Version <%= settings.version %>
+      </div>
+    </div>
+  </div>
+</footer>

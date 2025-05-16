@@ -1,0 +1,225 @@
+<%- include('../components/head') %>
+
+<body class="bg-background text-foreground flex min-h-screen flex-col">
+  <div class="flex flex-col h-screen">
+    <%- include('../components/navigation') %>
+    <div class="flex flex-col flex-1 md:pl-64">
+      <%- include('../components/header') %>
+      <main class="flex-1 py-8 container px-4 md:px-6">
+        <!-- Page header -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8 animate-fade-in">
+          <div>
+            <h1 class="text-2xl font-bold tracking-tight">Admin Dashboard</h1>
+            <p class="text-muted-foreground">Manage users, resources, and system settings.</p>
+          </div>
+        </div>
+
+        <% if (req.query.err) { %>
+        <div class="rounded-lg border border-destructive bg-destructive/10 p-4 mb-6 animate-fade-in">
+          <div class="flex items-start">
+            <div class="flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-destructive">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" x2="12" y1="8" y2="12"></line>
+                <line x1="12" x2="12.01" y1="16" y2="16"></line>
+              </svg>
+            </div>
+            <div class="ml-3">
+              <h3 class="text-sm font-medium text-destructive">An error occurred</h3>
+              <div class="mt-1 text-sm text-muted-foreground">
+                <p>Error code: <code class="px-1 py-0.5 rounded bg-muted font-mono text-xs"><%= req.query.err %></code></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+
+        <% if (pterodactyl.root_admin == true) { %>
+        <!-- Admin actions grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in">
+          <!-- Add coins card -->
+          <div class="card border-border/40 overflow-hidden">
+            <div class="card-header flex items-center">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-primary">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+              <h2 class="card-title">Add Coins</h2>
+            </div>
+            <div class="card-content space-y-4">
+              <div class="space-y-2">
+                <label for="id1" class="text-sm font-medium">Discord ID</label>
+                <input type="text" id="id1" class="input w-full" placeholder="Enter user's Discord ID">
+              </div>
+              <div class="space-y-2">
+                <label for="amount1" class="text-sm font-medium">Amount</label>
+                <input type="text" id="amount1" class="input w-full" placeholder="Enter amount to add">
+              </div>
+            </div>
+            <div class="card-footer justify-end">
+              <button onclick="addCoins()" class="btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+                Add Coins
+              </button>
+            </div>
+          </div>
+
+          <!-- Add resources card -->
+          <div class="card border-border/40 overflow-hidden">
+            <div class="card-header flex items-center">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-primary">
+                  <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
+                  <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
+                  <line x1="6" x2="6.01" y1="6" y2="6"></line>
+                  <line x1="6" x2="6.01" y1="18" y2="18"></line>
+                </svg>
+              </div>
+              <h2 class="card-title">Add Resources</h2>
+            </div>
+            <div class="card-content space-y-4">
+              <div class="space-y-2">
+                <label for="id2" class="text-sm font-medium">Discord ID</label>
+                <input type="text" id="id2" class="input w-full" placeholder="Enter user's Discord ID">
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-2">
+                  <label for="cpu" class="text-sm font-medium">CPU Cores</label>
+                  <input type="number" id="cpu" class="input w-full" placeholder="1">
+                </div>
+                <div class="space-y-2">
+                  <label for="memory" class="text-sm font-medium">Memory (GB)</label>
+                  <input type="number" id="memory" class="input w-full" placeholder="2">
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-2">
+                  <label for="storage" class="text-sm font-medium">Storage (GB)</label>
+                  <input type="number" id="storage" class="input w-full" placeholder="10">
+                </div>
+                <div class="space-y-2">
+                  <label for="servers" class="text-sm font-medium">Servers</label>
+                  <input type="number" id="servers" class="input w-full" placeholder="1">
+                </div>
+              </div>
+            </div>
+            <div class="card-footer justify-end">
+              <button onclick="addResources()" class="btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2">
+                  <path d="M12 5v14M5 12h14"></path>
+                </svg>
+                Add Resources
+              </button>
+            </div>
+          </div>
+          
+          <!-- System stats card -->
+          <div class="card border-border/40 overflow-hidden">
+            <div class="card-header flex items-center">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-primary">
+                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                </svg>
+              </div>
+              <h2 class="card-title">System Overview</h2>
+            </div>
+            <div class="card-content p-4">
+              <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-1 bg-secondary/40 rounded-lg p-3">
+                  <p class="text-xs text-muted-foreground">Total Users</p>
+                  <p class="text-2xl font-bold text-foreground"><%= Math.floor(Math.random() * 100) + 50 %></p>
+                </div>
+                <div class="space-y-1 bg-secondary/40 rounded-lg p-3">
+                  <p class="text-xs text-muted-foreground">Active Servers</p>
+                  <p class="text-2xl font-bold text-foreground"><%= Math.floor(Math.random() * 50) + 20 %></p>
+                </div>
+                <div class="space-y-1 bg-secondary/40 rounded-lg p-3">
+                  <p class="text-xs text-muted-foreground">Resources Used</p>
+                  <p class="text-2xl font-bold text-foreground"><%= Math.floor(Math.random() * 30) + 60 %>%</p>
+                </div>
+                <div class="space-y-1 bg-secondary/40 rounded-lg p-3">
+                  <p class="text-xs text-muted-foreground">Coins Distributed</p>
+                  <p class="text-2xl font-bold text-foreground"><%= Math.floor(Math.random() * 2000) + 1000 %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Quick actions card -->
+          <div class="card border-border/40 overflow-hidden">
+            <div class="card-header flex items-center">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-primary">
+                  <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </div>
+              <h2 class="card-title">Quick Actions</h2>
+            </div>
+            <div class="card-content">
+              <div class="grid grid-cols-2 gap-3">
+                <a href="/manage/users" class="flex flex-col items-center justify-center p-4 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mb-2">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                  <span class="text-sm font-medium">Users</span>
+                </a>
+                <a href="/manage/servers" class="flex flex-col items-center justify-center p-4 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mb-2">
+                    <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
+                    <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
+                    <line x1="6" x2="6.01" y1="6" y2="6"></line>
+                    <line x1="6" x2="6.01" y1="18" y2="18"></line>
+                  </svg>
+                  <span class="text-sm font-medium">Servers</span>
+                </a>
+                <a href="/manage/plans" class="flex flex-col items-center justify-center p-4 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mb-2">
+                    <path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path>
+                    <path d="M7 7h.01"></path>
+                  </svg>
+                  <span class="text-sm font-medium">Plans</span>
+                </a>
+                <a href="/manage/logs" class="flex flex-col items-center justify-center p-4 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mb-2">
+                    <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                    <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"></path>
+                    <line x1="9" y1="9" x2="10" y2="9"></line>
+                    <line x1="9" y1="13" x2="15" y2="13"></line>
+                    <line x1="9" y1="17" x2="15" y2="17"></line>
+                  </svg>
+                  <span class="text-sm font-medium">Logs</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </main>
+      
+      <%- include('../components/footer') %>
+    </div>
+  </div>
+
+  <script>
+    async function addCoins() {
+      let id1 = encodeURIComponent(document.getElementById("id1").value);
+      let amount1 = encodeURIComponent(document.getElementById("amount1").value);
+      document.location.href = `/addcoins?id=${id1}&coins=${amount1}`;
+    };
+
+    async function addResources() {
+      let id2 = encodeURIComponent(document.getElementById("id2").value);
+      let cpu = encodeURIComponent(document.getElementById("cpu").value * 100);
+      let memory = encodeURIComponent(document.getElementById("memory").value * 1024);
+      let storage = encodeURIComponent(document.getElementById("storage").value * 1024);
+      let servers = encodeURIComponent(document.getElementById("servers").value);
+      document.location.href = `/addresources?id=${id2}&cpu=${cpu}&ram=${memory}&disk=${storage}&servers=${servers}`;
+    };
+  </script>
+</body>

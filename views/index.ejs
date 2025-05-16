@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<%- include('./components/head') %>
+<% if (userinfo) { %>
+  <meta http-equiv="Refresh" content="0; url='../dashboard'" />
+<% } %>
+
+<body class="min-h-screen bg-background font-sans antialiased flex flex-col items-center justify-center p-4 md:p-8">
+  <div class="container relative flex-1 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 py-8">
+    <!-- Logo and branding column -->
+    <div class="w-full lg:w-1/2 space-y-6 text-center lg:text-left">
+      <div class="flex items-center justify-center lg:justify-start">
+        <img src="<%= settings.icon %>" alt="<%= settings.name %>" class="w-12 h-12 mr-3" />
+        <h1 class="text-3xl font-bold tracking-tight text-foreground"><%= settings.name %></h1>
+      </div>
+      
+      <div class="space-y-3">
+        <h2 class="text-4xl font-bold text-foreground">Powerful hosting, simplified.</h2>
+        <p class="text-muted-foreground max-w-md mx-auto lg:mx-0">Control your game and application servers with our easy-to-use client area built for the Pterodactyl Panel.</p>
+      </div>
+      
+      <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+        <a href="../login" class="btn-primary inline-flex items-center" style="background-color: var(--primary-color);">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+            <polyline points="10 17 15 12 10 7"></polyline>
+            <line x1="15" x2="3" y1="12" y2="12"></line>
+          </svg>
+          Sign in with Discord
+        </a>
+        <a href="<%= settings.website.discord %>" class="btn-outline inline-flex items-center" style="border-color: var(--border-color);">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <path d="M12 17h.01"></path>
+          </svg>
+          Need help?
+        </a>
+      </div>
+    </div>
+    
+    <!-- Image column -->
+    <div class="w-full lg:w-1/2">
+      <div class="relative rounded-lg overflow-hidden border border-border/40 shadow-xl h-full bg-card">
+        <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-tr from-primary/5 to-primary/10">
+          <div class="w-full h-full p-6 lg:p-8 flex items-center justify-center">
+            <img src="../assets/v2LB.png" alt="Dashboard Preview" class="max-w-full h-auto max-h-[500px] rounded-lg shadow-lg transform transition-transform duration-500 hover:scale-105" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Features section -->
+  <div class="container border-t border-border/40 py-12 mt-8">
+    <h3 class="text-2xl font-semibold text-center mb-8 text-foreground">Why choose <%= settings.name %></h3>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Feature 1 -->
+      <div class="p-6 rounded-lg border border-border/40 bg-card/60 hover:bg-card transition-colors">
+        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-primary">
+            <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
+          </svg>
+        </div>
+        <h4 class="text-lg font-medium mb-2">Lightning Fast</h4>
+        <p class="text-muted-foreground">Experience ultra-responsive performance with our optimized cloud infrastructure.</p>
+      </div>
+      
+      <!-- Feature 2 -->
+      <div class="p-6 rounded-lg border border-border/40 bg-card/60 hover:bg-card transition-colors">
+        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-primary">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <h4 class="text-lg font-medium mb-2">Secure & Reliable</h4>
+        <p class="text-muted-foreground">Your data and servers are protected with enterprise-grade security measures.</p>
+      </div>
+      
+      <!-- Feature 3 -->
+      <div class="p-6 rounded-lg border border-border/40 bg-card/60 hover:bg-card transition-colors">
+        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-primary">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M16 12h-6.5a2 2 0 1 0 0 4H12"></path>
+            <path d="M12 16h3.5a2 2 0 1 0 0-4H12"></path>
+          </svg>
+        </div>
+        <h4 class="text-lg font-medium mb-2">Seamless Integration</h4>
+        <p class="text-muted-foreground">Works perfectly with your existing Pterodactyl panel and services.</p>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="w-full border-t border-border/40 py-6 mt-auto">
+    <div class="container flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-muted-foreground">
+        &copy; <%= new Date().getFullYear() %> <%= settings.name %>. All rights reserved.
+      </p>
+      <div class="flex items-center space-x-4">
+        <a href="<%= settings.website.discord %>" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Discord</a>
+        <a href="/terms" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Terms</a>
+        <a href="/privacy" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Privacy</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
