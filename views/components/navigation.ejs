@@ -2,7 +2,9 @@
 <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/nanobar/0.4.2/nanobar.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.10/cdn.js" integrity="sha512-HmVkzN2y1iKGh8xS5D39FSs+D1rCvY/dM5A2T7pSGyJlqzrML1X0dgyx3ynSnWbTuKlL8i6V8XQdmu+CnguiRg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.10/cdn.js"
+  integrity="sha512-HmVkzN2y1iKGh8xS5D39FSs+D1rCvY/dM5A2T7pSGyJlqzrML1X0dgyx3ynSnWbTuKlL8i6V8XQdmu+CnguiRg=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
   .alertify-notifier .ajs-message.ajs-success {
     color: hsl(var(--foreground));
@@ -42,7 +44,9 @@
       <div class="flex items-center h-16 px-6 border-b border-border/40">
         <div class="flex items-center">
           <img src="<%= settings.icon %>" alt="<%= settings.name %>" class="w-8 h-8 mr-2">
-          <span class="text-lg font-semibold text-foreground"><%= settings.name %></span>
+          <span class="text-lg font-semibold text-foreground">
+            <%= settings.name %>
+          </span>
         </div>
       </div>
 
@@ -50,137 +54,195 @@
       <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
         <div class="space-y-2">
           <p class="px-3 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
-            <%= req.query.platform && req.query.platform == "account" ? "Your Account" : "Hosting & Cloud" %>
+            <%= req.query.platform && req.query.platform=="account" ? "Your Account" : "Hosting & Cloud" %>
           </p>
 
-          <% if (req.query.platform && req.query.platform == "account") { %>
+          <% if (req.query.platform && req.query.platform=="account" ) { %>
             <!-- Account section nav items -->
-            <a href="../profile?platform=account" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('profile') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+            <a href="../profile?platform=account"
+              class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('profile') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
               </svg>
               Profile
             </a>
-            <a href="../security?platform=account" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('security') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+            <a href="../security?platform=account"
+              class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('security') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
                 <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
               </svg>
               Credentials
             </a>
-          <% } else { %>
-            <!-- Hosting section nav items -->
-            <a href="../dashboard" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('dashboard') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
-                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
-                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
-                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
-              </svg>
-              Dashboard
-            </a>
-            <a href="../servers" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('servers') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
-                <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
-                <line x1="6" x2="6.01" y1="6" y2="6"></line>
-                <line x1="6" x2="6.01" y1="18" y2="18"></line>
-              </svg>
-              Servers
-            </a>
-            
-            <!-- <% if (pterodactyl.root_admin == true) { %> -->
-            <a href="../admin" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('admin') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-              Admin Panel
-            </a>
-          <!-- <% } %> -->
-
-            <!-- Wallet dropdown -->
-            <div x-data="{ open: false }" class="relative">
-              <button @click="open = !open" type="button" class="group flex items-center justify-between w-full px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
-                <div class="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                    <path d="M17 18.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path>
-                    <path d="M5 8h14"></path>
-                    <path d="M6 11V8h8"></path>
-                    <rect width="18" height="12" x="3" y="6" rx="2"></rect>
-                  </svg>
-                  Wallet
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 transition-transform" :class="{ 'rotate-180': open }">
-                  <path d="m6 9 6 6 6-6"></path>
+            <% } else { %>
+              <!-- Hosting section nav items -->
+              <a href="../dashboard"
+                class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('dashboard') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+                  <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                  <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                  <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                  <rect width="7" height="5" x="3" y="16" rx="1"></rect>
                 </svg>
-              </button>
-              
-              <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute left-0 z-10 mt-1 w-full origin-top-left rounded-md bg-card shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <div class="py-1">
-                  <% if (settings.linkvertise.enabled == true) { %>
-                    <a href="../lv" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                        <polyline points="9 10 4 15 9 20"></polyline>
-                        <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
-                      </svg>
-                      Linkvertise
-                    </a>
-                  <% } %>
-                  <% if (settings.api.afk.enabled == true) { %>
-                    <a href="../afk" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
-                      </svg>
-                      AFK Page
-                    </a>
-                  <% } %>
-                  <a href="../store" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
-                      <path d="M3 6h18"></path>
-                      <path d="M16 10a4 4 0 0 1-8 0"></path>
+                Dashboard
+              </a>
+              <a href="../servers"
+                class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('servers') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+                  <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
+                  <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
+                  <line x1="6" x2="6.01" y1="6" y2="6"></line>
+                  <line x1="6" x2="6.01" y1="18" y2="18"></line>
+                </svg>
+                Servers
+              </a>
+
+              <!-- <% if (pterodactyl.root_admin == true) { %> -->
+              <a href="../admin"
+                class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('admin') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+                  <path
+                    d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z">
+                  </path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                Admin Panel
+              </a>
+              <!-- <% } %> -->
+              <a href="../profile"
+                class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('admin') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                My Profile
+              </a>
+              <a href="../security"
+                class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('admin') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+                </svg>
+                My Credentials
+              </a>
+              <!-- Wallet dropdown -->
+              <div x-data="{ open: false }" class="relative">
+                <button @click="open = !open" type="button"
+                  class="group flex items-center justify-between w-full px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
+                  <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+                      <path d="M17 18.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path>
+                      <path d="M5 8h14"></path>
+                      <path d="M6 11V8h8"></path>
+                      <rect width="18" height="12" x="3" y="6" rx="2"></rect>
                     </svg>
-                    Resources
-                  </a>
-                  <a href="../referrals" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                      <circle cx="9" cy="7" r="4"></circle>
-                      <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg>
-                    Referrals
-                  </a>
-                  <a href="../transfer" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                      <path d="m17 7-1.41 1.41"></path>
-                      <path d="M7 7h10"></path>
-                      <path d="M3 7h2"></path>
-                      <path d="M10.3 14.3 7 11H3"></path>
-                      <path d="M7 17h10"></path>
-                      <path d="M17 17h4"></path>
-                    </svg>
-                    Transfer
-                  </a>
+                    Wallet
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 transition-transform"
+                    :class="{ 'rotate-180': open }">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
+                <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                  x-transition:enter-start="transform opacity-0 scale-95"
+                  x-transition:enter-end="transform opacity-100 scale-100"
+                  x-transition:leave="transition ease-in duration-75"
+                  x-transition:leave-start="transform opacity-100 scale-100"
+                  x-transition:leave-end="transform opacity-0 scale-95"
+                  class="absolute left-0 z-10 mt-1 w-full origin-top-left rounded-md bg-card shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <div class="py-1">
+                    <% if (settings.linkvertise.enabled==true) { %>
+                      <a href="../lv"
+                        class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                          stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                          class="w-5 h-5 mr-3 text-current">
+                          <polyline points="9 10 4 15 9 20"></polyline>
+                          <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+                        </svg>
+                        Linkvertise
+                      </a>
+                      <% } %>
+                        <% if (settings.api.afk.enabled==true) { %>
+                          <a href="../afk"
+                            class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              class="w-5 h-5 mr-3 text-current">
+                              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
+                            </svg>
+                            AFK Page
+                          </a>
+                          <% } %>
+                            <a href="../store"
+                              class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="w-5 h-5 mr-3 text-current">
+                                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                                <path d="M3 6h18"></path>
+                                <path d="M16 10a4 4 0 0 1-8 0"></path>
+                              </svg>
+                              Resources
+                            </a>
+                            <a href="../referrals"
+                              class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="w-5 h-5 mr-3 text-current">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                              </svg>
+                              Referrals
+                            </a>
+                            <a href="../transfer"
+                              class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="w-5 h-5 mr-3 text-current">
+                                <path d="m17 7-1.41 1.41"></path>
+                                <path d="M7 7h10"></path>
+                                <path d="M3 7h2"></path>
+                                <path d="M10.3 14.3 7 11H3"></path>
+                                <path d="M7 17h10"></path>
+                                <path d="M17 17h4"></path>
+                              </svg>
+                              Transfer
+                            </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          <% } %>
+              <% } %>
         </div>
 
         <div class="pt-5 mt-6 space-y-2 border-t border-border/40">
-          <a href="<%= settings.website.discord %>" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+          <a href="<%= settings.website.discord %>"
+            class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
               <circle cx="12" cy="12" r="10"></circle>
               <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
               <path d="M12 17h.01"></path>
             </svg>
             Support
           </a>
-          <a href="/logout" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-destructive/10 hover:text-destructive text-foreground">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+          <a href="/logout"
+            class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-destructive/10 hover:text-destructive text-foreground">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
               <polyline points="16 17 21 12 16 7"></polyline>
               <line x1="21" x2="9" y1="12" y2="12"></line>
@@ -195,135 +257,178 @@
   <!-- Mobile menu -->
   <div x-data="{ open: false }" class="md:hidden">
     <!-- Mobile menu button -->
-    <button @click="open = !open" type="button" class="fixed top-4 right-4 z-40 p-2 rounded-md bg-primary text-primary-foreground">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" x-show="!open">
+    <button @click="open = !open" type="button"
+      class="fixed top-4 right-4 z-40 p-2 rounded-md bg-primary text-primary-foreground">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" x-show="!open">
         <line x1="4" x2="20" y1="12" y2="12"></line>
         <line x1="4" x2="20" y1="6" y2="6"></line>
         <line x1="4" x2="20" y1="18" y2="18"></line>
       </svg>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" x-show="open">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" x-show="open">
         <path d="M18 6 6 18"></path>
         <path d="m6 6 12 12"></path>
       </svg>
     </button>
 
     <!-- Mobile menu panel -->
-    <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-x-full" x-transition:enter-end="opacity-100 translate-x-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-x-0" x-transition:leave-end="opacity-0 -translate-x-full" class="fixed inset-0 z-30 flex bg-background/95 backdrop-blur-sm">
+    <div x-show="open" x-transition:enter="transition ease-out duration-200"
+      x-transition:enter-start="opacity-0 -translate-x-full" x-transition:enter-end="opacity-100 translate-x-0"
+      x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-x-0"
+      x-transition:leave-end="opacity-0 -translate-x-full"
+      class="fixed inset-0 z-30 flex bg-background/95 backdrop-blur-sm">
       <div class="relative flex flex-col w-full max-w-xs pt-5 pb-4 bg-card">
         <div class="flex items-center px-6">
           <img src="<%= settings.icon %>" alt="<%= settings.name %>" class="w-8 h-8 mr-2">
-          <span class="text-lg font-semibold text-foreground"><%= settings.name %></span>
+          <span class="text-lg font-semibold text-foreground">
+            <%= settings.name %>
+          </span>
         </div>
         <div class="flex-1 mt-5 overflow-y-auto">
           <nav class="px-3 space-y-1">
-            <% if (req.query.platform && req.query.platform == "account") { %>
-              <p class="px-3 text-xs font-semibold tracking-wider text-muted-foreground uppercase pt-3 pb-1">Your Account</p>
-              <a href="../profile?platform=account" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('profile') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+            <% if (req.query.platform && req.query.platform=="account" ) { %>
+              <p class="px-3 text-xs font-semibold tracking-wider text-muted-foreground uppercase pt-3 pb-1">Your
+                Account</p>
+              <a href="../profile?platform=account"
+                class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('profile') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
                   <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
                   <circle cx="12" cy="7" r="4"></circle>
                 </svg>
                 Profile
               </a>
-              <a href="../security?platform=account" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('security') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+              <a href="../security?platform=account"
+                class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('security') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
                   <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                 </svg>
                 Credentials
               </a>
-            <% } else { %>
-              <p class="px-3 text-xs font-semibold tracking-wider text-muted-foreground uppercase pt-3 pb-1">Hosting & Cloud</p>
-              <a href="../dashboard" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('dashboard') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                  <rect width="7" height="9" x="3" y="3" rx="1"></rect>
-                  <rect width="7" height="5" x="14" y="3" rx="1"></rect>
-                  <rect width="7" height="9" x="14" y="12" rx="1"></rect>
-                  <rect width="7" height="5" x="3" y="16" rx="1"></rect>
-                </svg>
-                Dashboard
-              </a>
-              <a href="../servers" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('servers') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                  <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
-                  <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
-                  <line x1="6" x2="6.01" y1="6" y2="6"></line>
-                  <line x1="6" x2="6.01" y1="18" y2="18"></line>
-                </svg>
-                Servers
-              </a>
-              
-              <% if (pterodactyl.root_admin == true) { %>
-                <a href="../admin" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('admin') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
+              <% } else { %>
+                <p class="px-3 text-xs font-semibold tracking-wider text-muted-foreground uppercase pt-3 pb-1">Hosting &
+                  Cloud</p>
+                <a href="../dashboard"
+                  class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('dashboard') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+                    <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                    <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                    <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                    <rect width="7" height="5" x="3" y="16" rx="1"></rect>
                   </svg>
-                  Admin Panel
+                  Dashboard
                 </a>
-              <% } %>
+                <a href="../servers"
+                  class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('servers') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+                    <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
+                    <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
+                    <line x1="6" x2="6.01" y1="6" y2="6"></line>
+                    <line x1="6" x2="6.01" y1="18" y2="18"></line>
+                  </svg>
+                  Servers
+                </a>
 
-              <p class="px-3 text-xs font-semibold tracking-wider text-muted-foreground uppercase pt-3 pb-1">Wallet & Resources</p>
-              <% if (settings.linkvertise.enabled == true) { %>
-                <a href="../lv" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                    <polyline points="9 10 4 15 9 20"></polyline>
-                    <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
-                  </svg>
-                  Linkvertise
-                </a>
-              <% } %>
-              <% if (settings.api.afk.enabled == true) { %>
-                <a href="../afk" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
-                  </svg>
-                  AFK Page
-                </a>
-              <% } %>
-              <a href="../store" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
-                  <path d="M3 6h18"></path>
-                  <path d="M16 10a4 4 0 0 1-8 0"></path>
-                </svg>
-                Resources
-              </a>
-              <a href="../referrals" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="9" cy="7" r="4"></circle>
-                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                </svg>
-                Referrals
-              </a>
-              <a href="../transfer" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
-                  <path d="m17 7-1.41 1.41"></path>
-                  <path d="M7 7h10"></path>
-                  <path d="M3 7h2"></path>
-                  <path d="M10.3 14.3 7 11H3"></path>
-                  <path d="M7 17h10"></path>
-                  <path d="M17 17h4"></path>
-                </svg>
-                Transfer
-              </a>
-            <% } %>
+                <% if (pterodactyl.root_admin==true) { %>
+                  <a href="../admin"
+                    class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary <%= req._parsedUrl.pathname.includes('admin') ? 'bg-primary/10 text-primary' : 'text-foreground' %>">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+                      <path
+                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z">
+                      </path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    Admin Panel
+                  </a>
+                  <% } %>
+
+                    <p class="px-3 text-xs font-semibold tracking-wider text-muted-foreground uppercase pt-3 pb-1">
+                      Wallet & Resources</p>
+                    <% if (settings.linkvertise.enabled==true) { %>
+                      <a href="../lv"
+                        class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                          stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                          class="w-5 h-5 mr-3 text-current">
+                          <polyline points="9 10 4 15 9 20"></polyline>
+                          <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+                        </svg>
+                        Linkvertise
+                      </a>
+                      <% } %>
+                        <% if (settings.api.afk.enabled==true) { %>
+                          <a href="../afk"
+                            class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              class="w-5 h-5 mr-3 text-current">
+                              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
+                            </svg>
+                            AFK Page
+                          </a>
+                          <% } %>
+                            <a href="../store"
+                              class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="w-5 h-5 mr-3 text-current">
+                                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                                <path d="M3 6h18"></path>
+                                <path d="M16 10a4 4 0 0 1-8 0"></path>
+                              </svg>
+                              Resources
+                            </a>
+                            <a href="../referrals"
+                              class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="w-5 h-5 mr-3 text-current">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                              </svg>
+                              Referrals
+                            </a>
+                            <a href="../transfer"
+                              class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="w-5 h-5 mr-3 text-current">
+                                <path d="m17 7-1.41 1.41"></path>
+                                <path d="M7 7h10"></path>
+                                <path d="M3 7h2"></path>
+                                <path d="M10.3 14.3 7 11H3"></path>
+                                <path d="M7 17h10"></path>
+                                <path d="M17 17h4"></path>
+                              </svg>
+                              Transfer
+                            </a>
+                            <% } %>
           </nav>
         </div>
         <div class="pt-4 mt-6 border-t border-border/40">
           <div class="px-3 space-y-1">
-            <a href="<%= settings.website.discord %>" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+            <a href="<%= settings.website.discord %>"
+              class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-primary/10 hover:text-primary text-foreground">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
                 <circle cx="12" cy="12" r="10"></circle>
                 <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
                 <path d="M12 17h.01"></path>
               </svg>
               Support
             </a>
-            <a href="/logout" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-destructive/10 hover:text-destructive text-foreground">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
+            <a href="/logout"
+              class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-destructive/10 hover:text-destructive text-foreground">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-current">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                 <polyline points="16 17 21 12 16 7"></polyline>
                 <line x1="21" x2="9" y1="12" y2="12"></line>
@@ -339,179 +444,179 @@
   <!-- Main content area -->
   <div class="flex flex-col flex-1">
 
-<!-- Search system -->
-<%- include('../components/search') %>
+    <!-- Search system -->
+    <%- include('../components/search') %>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var currentPageUrl = window.location.href;
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          var currentPageUrl = window.location.href;
 
-    // Get all navigation links
-    var navLinks = document.querySelectorAll('.nav-link');
+          // Get all navigation links
+          var navLinks = document.querySelectorAll('.nav-link');
 
-    // Loop through each navigation link
-    navLinks.forEach(function(link) {
-      // Get the href attribute of the link
-      var linkUrl = link.getAttribute('href');
+          // Loop through each navigation link
+          navLinks.forEach(function (link) {
+            // Get the href attribute of the link
+            var linkUrl = link.getAttribute('href');
 
-      // Check if the current page URL contains the link URL
-      if (currentPageUrl.includes(linkUrl.replace('../', '/'))) {
-        // Remove all existing classes
-        link.className = 'nav-link';
+            // Check if the current page URL contains the link URL
+            if (currentPageUrl.includes(linkUrl.replace('../', '/'))) {
+              // Remove all existing classes
+              link.className = 'nav-link';
 
-        // Add the specified classes
-        link.classList.add(
-          'transition',
-          'text-[#0a9875]',
-          'bg-[#0a9875]/5',
-          'shadow',
-          'group',
-          'flex',
-          'items-center',
-          'px-3',
-          'py-2.5',
-          'text-sm',
-          'font-semibold',
-          'rounded-lg'
-        );
-      }
-    });
-  });
-</script>
-<style>
-  .hidden {
-    display: none;
-  }
+              // Add the specified classes
+              link.classList.add(
+                'transition',
+                'text-[#0a9875]',
+                'bg-[#0a9875]/5',
+                'shadow',
+                'group',
+                'flex',
+                'items-center',
+                'px-3',
+                'py-2.5',
+                'text-sm',
+                'font-semibold',
+                'rounded-lg'
+              );
+            }
+          });
+        });
+      </script>
+      <style>
+        .hidden {
+          display: none;
+        }
 
-  .modal {
-    display: none;
-    /* Initially hide the modal */
-    position: fixed;
-    z-index: 50;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: #f3f4f6;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
+        .modal {
+          display: none;
+          /* Initially hide the modal */
+          position: fixed;
+          z-index: 50;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          background-color: #f3f4f6;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
 
-  .newAccountModal {
-    position: fixed;
-    z-index: 50;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
+        .newAccountModal {
+          position: fixed;
+          z-index: 50;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          background-color: rgba(0, 0, 0, 0.4);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
 
-  .newAccountContent {
-    transition: opacity 0.2s ease-in-out;
-    /* Added transition for opacity */
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 48px;
-    width: 30%;
-    border-radius: 24px;
-  }
+        .newAccountContent {
+          transition: opacity 0.2s ease-in-out;
+          /* Added transition for opacity */
+          background-color: #fff;
+          margin: 15% auto;
+          padding: 48px;
+          width: 30%;
+          border-radius: 24px;
+        }
 
-  .modal-content {
-    opacity: 0;
-    /* Initially hide the modal content */
-    transition: opacity 0.2s ease-in-out;
-    /* Added transition for opacity */
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 48px;
-    width: 30%;
-    border-radius: 24px;
-  }
+        .modal-content {
+          opacity: 0;
+          /* Initially hide the modal content */
+          transition: opacity 0.2s ease-in-out;
+          /* Added transition for opacity */
+          background-color: #fff;
+          margin: 15% auto;
+          padding: 48px;
+          width: 30%;
+          border-radius: 24px;
+        }
 
-  @media (max-width: 768px) {
-    .modal-content {
-      width: 80%;
-    }
-  }
+        @media (max-width: 768px) {
+          .modal-content {
+            width: 80%;
+          }
+        }
 
-  .modal.show {
-    display: block;
-    /* Show the modal when it has the 'show' class */
-  }
+        .modal.show {
+          display: block;
+          /* Show the modal when it has the 'show' class */
+        }
 
-  .modal-content.visible {
-    opacity: 1;
-    /* Show the modal content when it has the 'visible' class */
-  }
-</style>
+        .modal-content.visible {
+          opacity: 1;
+          /* Show the modal content when it has the 'visible' class */
+        }
+      </style>
 
-<script>
-  var options = {
-    classname: 'loadingbar',
-    id: 'loadingbar'
-  };
-  var nanobar = new Nanobar(options);
-  // Show the spinner with a smooth transition
-  var spinner = document.getElementById('spinner');
-  spinner.style.opacity = '1';
-  // Simulate a slower loading progress
-  function simulateLoading() {
-    nanobar.go(10); // Change this value to control the loading speed
-    setTimeout(function() {
-      nanobar.go(50);
-    }, 190); // Delay the progress update
-    setTimeout(function() {
-      nanobar.go(100);
-      // Hide the spinner with a smooth transition
-      spinner.style.opacity = '0';
-    }, 400); // Another delay
-  }
-  simulateLoading();
-</script>
-<style>
-  .loadingbar .bar {
-    background: #0a9875;
-    -webkit-box-shadow: 0px 4px 38px -15px #0a9875;
-    -moz-box-shadow: 0px 4px 38px -15px #0a9875;
-    box-shadow: 0px 4px 38px -15px #0a9875;
-    height: 1.85px;
-  }
-</style>
-<style>
-  #skeleton-loader {
-    display: none;
-  }
+      <script>
+        var options = {
+          classname: 'loadingbar',
+          id: 'loadingbar'
+        };
+        var nanobar = new Nanobar(options);
+        // Show the spinner with a smooth transition
+        var spinner = document.getElementById('spinner');
+        spinner.style.opacity = '1';
+        // Simulate a slower loading progress
+        function simulateLoading() {
+          nanobar.go(10); // Change this value to control the loading speed
+          setTimeout(function () {
+            nanobar.go(50);
+          }, 190); // Delay the progress update
+          setTimeout(function () {
+            nanobar.go(100);
+            // Hide the spinner with a smooth transition
+            spinner.style.opacity = '0';
+          }, 400); // Another delay
+        }
+        simulateLoading();
+      </script>
+      <style>
+        .loadingbar .bar {
+          background: #0a9875;
+          -webkit-box-shadow: 0px 4px 38px -15px #0a9875;
+          -moz-box-shadow: 0px 4px 38px -15px #0a9875;
+          box-shadow: 0px 4px 38px -15px #0a9875;
+          height: 1.85px;
+        }
+      </style>
+      <style>
+        #skeleton-loader {
+          display: none;
+        }
 
-  #skeleton-loader.active {
-    display: block;
-  }
-</style>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Get references to the skeleton loader and content elements
-    const skeletonLoader = document.getElementById("skeleton-loader");
-    const content = document.getElementById("content");
+        #skeleton-loader.active {
+          display: block;
+        }
+      </style>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          // Get references to the skeleton loader and content elements
+          const skeletonLoader = document.getElementById("skeleton-loader");
+          const content = document.getElementById("content");
 
-    // Function to show the skeleton loader and hide the content
-    function showSkeletonLoader() {
-      skeletonLoader.classList.add("active");
-      content.style.display = "none";
-    }
+          // Function to show the skeleton loader and hide the content
+          function showSkeletonLoader() {
+            skeletonLoader.classList.add("active");
+            content.style.display = "none";
+          }
 
-    // Function to hide the skeleton loader and show the content
-    function hideSkeletonLoader() {
-      skeletonLoader.classList.remove("active");
-      content.style.display = "block";
-    }
+          // Function to hide the skeleton loader and show the content
+          function hideSkeletonLoader() {
+            skeletonLoader.classList.remove("active");
+            content.style.display = "block";
+          }
 
-    // Show the skeleton loader immediately (initial state)
-    showSkeletonLoader();
-    setTimeout(hideSkeletonLoader, 250);
-  });
-</script>
-<script src="./preline/dist/preline.js"></script>
+          // Show the skeleton loader immediately (initial state)
+          showSkeletonLoader();
+          setTimeout(hideSkeletonLoader, 250);
+        });
+      </script>
+      <script src="./preline/dist/preline.js"></script>

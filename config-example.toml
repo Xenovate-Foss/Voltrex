@@ -1,6 +1,6 @@
 # Name and timezone
-name = "Yes"
-icon = "../assets/spinner.png"
+name = "Zypher Cloud"
+icon = "../assets/logo.png"
 timezone = "Europe/London"
 
 # Heliactyl release information
@@ -9,19 +9,19 @@ version = "10.0.0"
 # Additional settings
 testing = false
 clusters = 1
-database = "sqlite://heliactyl3.db"
+database = "sqlite://voltrex.db"
 
 # Pterodactyl settings
 [pterodactyl]
-domain = "https://panel.example.com"
-key = "ptla_"
+domain = "https://free.zypher.cloud"
+key = "ptlc_th0_g1y_o61y_4n5rstd"
 
 # Webserver
 [website]
 port = 3_001
 secret = "secret"
 discord = "https://discord.gg/example"
-coins = "Coins"
+coins = "ZPR"
 # Color was supposed to be here, but due to tailwind issues, we're unable to do that.
 
 # Module settings (formerly API)
@@ -34,6 +34,7 @@ accountSwitcher = true
 
   [api.client.j4r]
   enabled = false
+
 
     [[api.client.j4r.ads]]
     name = "Example server 1"
@@ -78,8 +79,8 @@ accountSwitcher = true
 
   [api.client.oauth2]
   _comment = "Go to https://discord.dev/ and create an application to set up OAuth2. This is required for Heliactyl to work. You must also set the redirect URL to the link below."
-  id = ""
-  secret = ""
+  id = "69001234560069"
+  secret = "16zzZZzSsscSCCSCCSccsc"
   link = "http://localhost:3001"
   callbackpath = "/callback"
   prompt = true
@@ -119,10 +120,42 @@ servers = 4
       [api.client.packages.rolePackages.roles]
 
 [api.client.locations.1]
-name = "United States"
-iso = "US"
+name = "Mum-01"
+iso = "IN"
 pro = false
 show = true
+
+
+
+[api.client.eggs.paper]
+_note69 = "Check Your Egg Id And Name These Are Main Things U Should Put Valid"
+pro = false
+display = "Minecraft - Paper"
+
+  [api.client.eggs.paper.minimum]
+  ram = 1_024
+  disk = 1_024
+  cpu = 100
+
+  [api.client.eggs.paper.maximum]
+  ram = 6_144
+  disk = 20_480
+  cpu = 600
+
+  [api.client.eggs.paper.info]
+  egg = 2
+  docker_image = "ghcr.io/zenllc/java:21"
+  startup = "java -Xms256M -Xmx{{SERVER_MEMORY}}M {{JAVA_ARGUMENTS}} -jar {{SERVER_JARFILE}}"
+
+    [api.client.eggs.paper.info.environment]
+    SERVER_JARFILE = "server.jar"
+    BUILD_NUMBER = "latest"
+    JAVA_ARGUMENTS = "--add-modules=jdk.incubator.vector -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs/ -Daikars.new.flags=true -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20"
+
+    [api.client.eggs.paper.info.feature_limits]
+    databases = 4
+    backups = 4
+
 
 [api.client.eggs.purpur]
 pro = false
@@ -209,32 +242,6 @@ display = "Vanilla Bedrock"
     CHEATS = "false"
 
     [api.client.eggs.vanillabugrock.info.feature_limits]
-    databases = 4
-    backups = 4
-
-[api.client.eggs.pmmpbugrock]
-pro = false
-display = "PocketMineMP"
-
-  [api.client.eggs.pmmpbugrock.minimum]
-  ram = 512
-  disk = 128
-  cpu = 50
-
-  [api.client.eggs.pmmpbugrock.maximum]
-  ram = 6_144
-  disk = 20_480
-  cpu = 400
-
-  [api.client.eggs.pmmpbugrock.info]
-  egg = 21
-  docker_image = "ghcr.io/parkervcp/yolks:debian"
-  startup = "./bin/php7/bin/php ./PocketMine-MP.phar --no-wizard"
-
-    [api.client.eggs.pmmpbugrock.info.environment]
-    VERSION = "PM5"
-
-    [api.client.eggs.pmmpbugrock.info.feature_limits]
     databases = 4
     backups = 4
 
