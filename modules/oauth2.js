@@ -18,7 +18,7 @@ const fetch = require("node-fetch");
 const indexjs = require("../app.js");
 const log = require("../handlers/log.js");
 const fs = require("fs");
-const { renderFile } = require("ejs");
+const ejs = require("ejs");
 const vpnCheck = require("../handlers/vpnCheck.js");
 
 if (settings.api.client.oauth2.link.slice(-1) == "/")
@@ -264,7 +264,7 @@ module.exports.load = async function (app, db) {
           ) {
             const ipuser = await db.get(`ipuser-${ip}`);
             if (ipuser && ipuser !== userinfo.id) {
-              renderFile(
+              ejs.renderFile(
                 `./themes/${settings.defaulttheme}/alerts/alt.ejs`,
                 {
                   settings: settings,

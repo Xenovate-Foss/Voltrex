@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
 <%- include('./components/head') %>
-<% if (userinfo) { %>
-  <meta http-equiv="Refresh" content="0; url='../dashboard'" />
-<% } %>
 
 <body class="min-h-screen bg-background font-sans antialiased flex flex-col items-center justify-center p-4 md:p-8">
   <div class="container relative flex-1 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 py-8">
@@ -18,77 +15,68 @@
         <h2 class="text-4xl font-bold text-foreground">Powerful hosting, simplified.</h2>
         <p class="text-muted-foreground max-w-md mx-auto lg:mx-0">Control your game and application servers with our easy-to-use client area built for the Pterodactyl Panel.</p>
       </div>
-      
-      <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-        <a href="../login" class="btn-primary inline-flex items-center" style="background-color: var(--primary-color);">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2">
-            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-            <polyline points="10 17 15 12 10 7"></polyline>
-            <line x1="15" x2="3" y1="12" y2="12"></line>
-          </svg>
-          Sign in with Discord
-        </a>
-        <a href="<%= settings.website.discord %>" class="btn-outline inline-flex items-center" style="border-color: var(--border-color);">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-            <path d="M12 17h.01"></path>
-          </svg>
-          Need help?
-        </a>
-      </div>
+
+      <% if (userinfo) { %>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <a href="/dashboard" class="inline-flex items-center justify-center rounded-md bg-[#0a9875] px-4 py-2 text-sm font-medium text-white hover:bg-[#0a9875]/90">
+            Go to Dashboard
+          </a>
+          <a href="/servers" class="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+            View Servers
+          </a>
+        </div>
+      <% } else { %>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <a href="/login" class="inline-flex items-center justify-center rounded-md bg-[#0a9875] px-4 py-2 text-sm font-medium text-white hover:bg-[#0a9875]/90">
+            Get Started
+          </a>
+          <a href="/login?prompt=none" class="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+            Login
+          </a>
+        </div>
+      <% } %>
     </div>
-    
-    <!-- Image column -->
-    <div class="w-full lg:w-1/2">
-      <div class="relative rounded-lg overflow-hidden border border-border/40 shadow-xl h-full bg-card">
-        <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-tr from-primary/5 to-primary/10">
-          <div class="w-full h-full p-6 lg:p-8 flex items-center justify-center">
-            <img src="../assets/v2LB.png" alt="Dashboard Preview" class="max-w-full h-auto max-h-[500px] rounded-lg shadow-lg transform transition-transform duration-500 hover:scale-105" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Features section -->
-  <div class="container border-t border-border/40 py-12 mt-8">
-    <h3 class="text-2xl font-semibold text-center mb-8 text-foreground">Why choose <%= settings.name %></h3>
-    
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <!-- Feature 1 -->
-      <div class="p-6 rounded-lg border border-border/40 bg-card/60 hover:bg-card transition-colors">
-        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-primary">
-            <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
+
+    <!-- Features column -->
+    <div class="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-6 rounded-lg bg-[#162027] border border-[#1e293b]/50 hover:border-[#0a9875]/20 transition-colors">
+        <div class="w-12 h-12 rounded-lg bg-[#0a9875]/10 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-[#0a9875]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
         </div>
-        <h4 class="text-lg font-medium mb-2">Lightning Fast</h4>
-        <p class="text-muted-foreground">Experience ultra-responsive performance with our optimized cloud infrastructure.</p>
+        <h3 class="text-lg font-semibold text-white mb-2">Lightning Fast</h3>
+        <p class="text-zinc-400">High-performance servers with instant setup and deployment.</p>
       </div>
-      
-      <!-- Feature 2 -->
-      <div class="p-6 rounded-lg border border-border/40 bg-card/60 hover:bg-card transition-colors">
-        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-primary">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+
+      <div class="p-6 rounded-lg bg-[#162027] border border-[#1e293b]/50 hover:border-[#0a9875]/20 transition-colors">
+        <div class="w-12 h-12 rounded-lg bg-[#0a9875]/10 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-[#0a9875]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
           </svg>
         </div>
-        <h4 class="text-lg font-medium mb-2">Secure & Reliable</h4>
-        <p class="text-muted-foreground">Your data and servers are protected with enterprise-grade security measures.</p>
+        <h3 class="text-lg font-semibold text-white mb-2">Secure & Reliable</h3>
+        <p class="text-zinc-400">Enterprise-grade security with 99.9% uptime guarantee.</p>
       </div>
-      
-      <!-- Feature 3 -->
-      <div class="p-6 rounded-lg border border-border/40 bg-card/60 hover:bg-card transition-colors">
-        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-primary">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M16 12h-6.5a2 2 0 1 0 0 4H12"></path>
-            <path d="M12 16h3.5a2 2 0 1 0 0-4H12"></path>
+
+      <div class="p-6 rounded-lg bg-[#162027] border border-[#1e293b]/50 hover:border-[#0a9875]/20 transition-colors">
+        <div class="w-12 h-12 rounded-lg bg-[#0a9875]/10 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-[#0a9875]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
           </svg>
         </div>
-        <h4 class="text-lg font-medium mb-2">Seamless Integration</h4>
-        <p class="text-muted-foreground">Works perfectly with your existing Pterodactyl panel and services.</p>
+        <h3 class="text-lg font-semibold text-white mb-2">24/7 Support</h3>
+        <p class="text-zinc-400">Round-the-clock technical support from our expert team.</p>
+      </div>
+
+      <div class="p-6 rounded-lg bg-[#162027] border border-[#1e293b]/50 hover:border-[#0a9875]/20 transition-colors">
+        <div class="w-12 h-12 rounded-lg bg-[#0a9875]/10 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-[#0a9875]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-white mb-2">Easy Management</h3>
+        <p class="text-zinc-400">Intuitive control panel for effortless server management.</p>
       </div>
     </div>
   </div>

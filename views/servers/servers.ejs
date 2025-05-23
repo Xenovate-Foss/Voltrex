@@ -122,9 +122,9 @@
                     <line x1="6" x2="6.01" y1="18" y2="18"></line>
                   </svg>
                 </div>
-                <div>
+                <div class="pl-4">
                   <h3 class="card-title"><%= serverName %></h3>
-                  <p class="card-description font-mono text-xs"><%= server.identifier %></p>
+                  <p class="card-description font-mono text-xs my-8">Server ID : <code class="text-muted-foreground"><%= server.identifier %></code></p>
                 </div>
               </div>
               <div class="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -141,7 +141,7 @@
             </div>
           </div>
           <div class="card-content pb-3">
-            <div class="grid grid-cols-3 gap-2 text-sm">
+            <div class="grid grid-cols-3 gap-2 text-sm card p-4">
               <div class="flex flex-col">
                 <span class="text-muted-foreground">CPU</span>
                 <span class="font-medium"><%= server.limits.cpu/100 %> core<%= server.limits.cpu/100 !== 1 ? 's' : '' %></span>

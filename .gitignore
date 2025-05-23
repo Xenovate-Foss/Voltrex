@@ -1,5 +1,5 @@
 node_modules/
 config.toml
-heliactyl3.db
+voltrex.db
 .vscode/
 package-lock.json

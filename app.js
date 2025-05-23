@@ -83,6 +83,26 @@ async function renderdataeval(req, theme) {
     db: db,
     workerId: workerIds[cluster.worker.id] // Add the worker ID here
   };
+  // Add resource calculations for dashboard
+  if (req.session.pterodactyl && req.session.pterodactyl.relationships && req.session.pterodactyl.relationships.servers) {
+    let ram = 0, disk = 0, cpu = 0;
+    let servers = req.session.pterodactyl.relationships.servers.data.length;
+    for (let i = 0; i < servers; i++) {
+      const server = req.session.pterodactyl.relationships.servers.data[i];
+      ram += typeof server.attributes.limits.memory === "number" ? server.attributes.limits.memory : 0;
+      disk += typeof server.attributes.limits.disk === "number" ? server.attributes.limits.disk : 0;
+      cpu += typeof server.attributes.limits.cpu === "number" ? server.attributes.limits.cpu : 0;
+    }
+    renderdata.ram = ram;
+    renderdata.disk = disk;
+    renderdata.cpu = cpu;
+    renderdata.servers = servers;
+  } else {
+    renderdata.ram = 0;
+    renderdata.disk = 0;
+    renderdata.cpu = 0;
+    renderdata.servers = 0;
+  }
   renderdata.arcioafktext = JavaScriptObfuscator.obfuscate(`
     let everywhat = ${settings.api.afk.every};
     let gaincoins = ${settings.api.afk.coins};
@@ -152,7 +172,7 @@ if (cluster.isMaster) {
     console.table(modulesTable);
   
     const numCPUs = settings.clusters;
-    console.log(chalk.gray('Starting workers on Heliactyl ' + settings.version));
+    console.log(chalk.gray('Starting workers on Voltrex ' + settings.version));
     console.log(chalk.gray(`Master ${process.pid} is running`));
     console.log(chalk.gray(`Forking ${numCPUs} workers...`));
   
@@ -218,7 +238,7 @@ if (cluster.isMaster) {
   module.exports.app = app;
 
   app.use((req, res, next) => {
-    res.setHeader("X-Powered-By", "Zen - UI10");
+    res.setHeader("Powered-By", "Xenovate - Voltrex");
     next();
   });
 
@@ -249,6 +269,7 @@ if (cluster.isMaster) {
     console.log(
       chalk.white("Web cluster is now ") + chalk.green('online')
     );
+    console.log('Started At Port : ' + settings.website.port)
   });
 
   var cache = false;

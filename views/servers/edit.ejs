@@ -21,7 +21,7 @@
                 </div>
               </div>
             </div>
-            <div class="bg-[#10181e] rounded-lg text-darker text-sm">
+            <div class="card p-8 rounded-lg text-darker text-sm border-white/40">
               <%
                     let ram = 0;
                     let disk = 0;
@@ -53,11 +53,11 @@
 
                   </div>
                 </div>
-                <div class="grid grid-cols-3 gap-6">
+                <div class="grid grid-cols-3 gap-6 ">
                   <div class="col-span-3 sm:col-span-2">
                     <label for="company-website" class="block text-white font-medium text-sm">Memory (GiB)</label>
                     <div class="mt-1 flex">
-                      <input type="text" name="company-website" id="ram" class="mt-3 px-4 py-2 w-full border border-white/5 bg-[#162027]/30 border-none focus:ring-[#0a9875] transition font-medium pl-4 py-3 text-sm text-zinc-400 placeholder:text-zinc-500 tracking-tight rounded-2xl w-96" value="<%= serverinfo.attributes.limits.memory/1024 %>">
+                      <input type="text" name="company-website" id="ram" class="card mt-3 px-4 py-2 w-full border border-white/5 bg-[#162027]/30 border-none focus:ring-[#0a9875] transition font-medium pl-4 py-3 text-sm text-zinc-400 placeholder:text-zinc-500 tracking-tight rounded-2xl w-96" value="<%= serverinfo.attributes.limits.memory/1024 %>">
                     </div>
                   </div>
                 </div><br>
@@ -66,7 +66,7 @@
                   <div class="col-span-3 sm:col-span-2">
                     <label for="company-website" class="block text-white font-medium text-sm">CPU Cores</label>
                     <div class="mt-1 flex">
-                      <input type="text" name="company-website" id="cpu" class="mt-3 px-4 py-2 w-full border border-white/5 bg-[#162027]/30 border-none focus:ring-[#0a9875] transition font-medium pl-4 py-3 text-sm text-zinc-400 placeholder:text-zinc-500 tracking-tight rounded-2xl w-96" value="<%= serverinfo.attributes.limits.cpu/100 %>">
+                      <input type="text" name="company-website" id="cpu" class="card mt-3 px-4 py-2 w-full border border-white/5 bg-[#162027]/30 border-none focus:ring-[#0a9875] transition font-medium pl-4 py-3 text-sm text-zinc-400 placeholder:text-zinc-500 tracking-tight rounded-2xl w-96" value="<%= serverinfo.attributes.limits.cpu/100 %>">
                     </div>
                   </div>
                 </div><br>
@@ -75,7 +75,7 @@
                   <div class="col-span-3 sm:col-span-2">
                     <label for="company-website" class="block text-white font-medium text-sm">Storage (GiB)</label>
                     <div class="mt-1 flex">
-                      <input type="text" name="company-website" id="disk" class="mt-3 px-4 py-2 w-full border border-white/5 bg-[#162027]/30 border-none focus:ring-[#0a9875] transition font-medium pl-4 py-3 text-sm text-zinc-400 placeholder:text-zinc-500 tracking-tight rounded-2xl w-96" value="<%= serverinfo.attributes.limits.disk/1024 %>">
+                      <input type="text" name="company-website" id="disk" class="card mt-3 px-4 py-2 w-full border border-white/5 bg-[#162027]/30 border-none focus:ring-[#0a9875] transition font-medium pl-4 py-3 text-sm text-zinc-400 placeholder:text-zinc-500 tracking-tight rounded-2xl w-96" value="<%= serverinfo.attributes.limits.disk/1024 %>">
                     </div>
                   </div>
                 </div><br><br>

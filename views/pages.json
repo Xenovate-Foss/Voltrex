@@ -1,5 +1,5 @@
 {
-  "index": "general/dashboard.ejs",
+  "index": "index.ejs",
   "notfound": "errors/404.ejs",
   "redirect": {
     "callback": "/dashboard",
